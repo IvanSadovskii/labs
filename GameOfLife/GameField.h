@@ -29,7 +29,7 @@ private:
     int length;
     int width;
 
-    std::vector<std::vector<bool>> cur_field;
+    std::vector<std::vector<bool>> cur_field; //
     std::vector<std::vector<int>> neighbors;
 
 };

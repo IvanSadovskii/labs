@@ -3,7 +3,7 @@
 int main() {
     gamefield f(10,20);
     f.set_life(0,0);
-    f.set_life(1,0);
+    f.set_life(1,0); //
     f.set_life(2,0);
 
     f.print_field();

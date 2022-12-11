@@ -4,7 +4,7 @@ gamefield::gamefield(int length, int width) {
     this->width = width;
     this->length = length;
 
-    neighbors.reserve(length);
+    neighbors.reserve(length); //
     cur_field.reserve(length); //на два в ширину и на два в длину
 
 
