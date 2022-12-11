@@ -327,37 +327,14 @@ namespace bigint {
     BigInt &BigInt::operator&=(const BigInt &other) {
         BigInt result;
         BigInt tmp = other;
-
         int this_sign = this->sign;
 
-        (*this).bit_neg_check();
-        tmp.bit_neg_check();
+        std::vector<std::string> str_results = get_result_str(tmp,this->sign,other.sign);
 
-        int max_str_sign, min_str_sign;
-
-        std::string max_str = get_max_str(tmp);
-        std::string min_str;
-
-        if (max_str == (*this).Bigint_to_binary_str()) {
-            max_str_sign = this_sign;
-            min_str_sign = other.sign;
-            min_str  = tmp.Bigint_to_binary_str();
-        }
-        else {
-            min_str = (*this).Bigint_to_binary_str();
-            max_str_sign = other.sign;
-            min_str_sign = this_sign;
-        }
-
+        std::string max_str = str_results[0];
+        std::string min_str = str_results[1];
 
         int max_index = (int) max_str.size() - 1;
-
-        min_str.insert(0, max_str.size() - min_str.size(), '0');
-
-        max_str = str_invert_check(max_str,max_str_sign);
-        min_str = str_invert_check(min_str,min_str_sign);
-
-
         while (max_index >= 0) {
             if (max_str[max_index] == '1' && min_str[max_index] == '1') max_str[max_index] = '1';
             else max_str[max_index] = '0';
@@ -384,35 +361,14 @@ namespace bigint {
     BigInt &BigInt::operator|=(const BigInt &other) {
         BigInt result;
         BigInt tmp = other;
-
         int this_sign = this->sign;
 
-        (*this).bit_neg_check();
-        tmp.bit_neg_check();
+        std::vector<std::string> str_results = get_result_str(tmp,this->sign,other.sign);
 
-        int max_str_sign, min_str_sign;
-
-        std::string max_str = get_max_str(tmp);
-        std::string min_str;
-
-        if (max_str == (*this).Bigint_to_binary_str()) {
-            max_str_sign = this_sign;
-            min_str_sign = other.sign;
-            min_str  = tmp.Bigint_to_binary_str();
-        }
-        else {
-            min_str = (*this).Bigint_to_binary_str();
-            max_str_sign = other.sign;
-            min_str_sign = this_sign;
-        }
-
+        std::string max_str = str_results[0];
+        std::string min_str = str_results[1];
 
         int max_index = (int) max_str.size() - 1;
-
-        min_str.insert(0, max_str.size() - min_str.size(), '0');
-
-        max_str = str_invert_check(max_str,max_str_sign);
-        min_str = str_invert_check(min_str,min_str_sign);
 
 
         while (max_index >= 0) {
@@ -632,6 +588,37 @@ namespace bigint {
     std::string BigInt::str_invert_check(std::string str, int str_sign) {
         if (str_sign == MINUS) return invert(str);
         else return str;
+    }
+    std::vector<std::string> BigInt::get_result_str(BigInt &tmp, int this_sign, int other_sign) {
+        std::vector<std::string> result;
+
+        (*this).bit_neg_check();
+        tmp.bit_neg_check();
+
+        int max_str_sign, min_str_sign;
+
+        std::string max_str = get_max_str(tmp);
+        std::string min_str;
+
+        if (max_str == (*this).Bigint_to_binary_str()) {
+            max_str_sign = this_sign;
+            min_str_sign = other_sign;
+            min_str  = tmp.Bigint_to_binary_str();
+        }
+        else {
+            min_str = (*this).Bigint_to_binary_str();
+            max_str_sign = other_sign;
+            min_str_sign = this_sign;
+        }
+
+        min_str.insert(0, max_str.size() - min_str.size(), '0');
+
+        max_str = str_invert_check(max_str,max_str_sign);
+        min_str = str_invert_check(min_str,min_str_sign);
+        result.push_back(min_str);
+        result.push_back(max_str);
+
+        return result;
     }
 
 

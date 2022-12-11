@@ -67,11 +67,14 @@ namespace bigint {
         void bit_neg_check();
         std::string str_invert_check(std::string,int);
 
+        std::vector<std::string> get_result_str(BigInt &, int, int);
+
         void binary_str_to_Bigint(std::string str);
 
         void is_negative_zero();
 
         std::string invert(std::string);
+
     };
 
     BigInt operator+(const BigInt &, const BigInt &);
