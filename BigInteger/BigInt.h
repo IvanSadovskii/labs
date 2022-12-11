@@ -5,74 +5,85 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <climits>
 
-class BigInt {
-public:
-    BigInt(); //done
-    BigInt(int); //done
-    BigInt(std::string); //done
-    BigInt(const BigInt&); //done
-    ~BigInt(); //done
+namespace bigint {
+    class BigInt {
+    private:
+        std::vector<int> digits;
+        const int radix = 1000000000;
+        bool sign;
+    public:
+        BigInt();
+        BigInt(int);
+        BigInt(std::string);
+        BigInt(const BigInt &);
+        ~BigInt();
 
-    BigInt& operator=(const BigInt&);  //done
+        BigInt &operator=(const BigInt &);
 
-    BigInt operator~() const; //3
+        BigInt operator~() const;
 
-    BigInt& operator++(); //done
-    const BigInt operator++(int); //done
-    BigInt& operator--(); //done
-    const BigInt operator--(int); //done
+        BigInt &operator++();
+        const BigInt operator++(int);
+        BigInt &operator--();
+        const BigInt operator--(int);
 
-    BigInt& operator+=(const BigInt&); //done
-    BigInt& operator*=(const BigInt&); //done
-    BigInt& operator-=(const BigInt&); //done
-    BigInt& operator/=(const BigInt&); //done
-    BigInt& operator^=(const BigInt&); //done
-    BigInt& operator%=(const BigInt&); //done
-    BigInt& operator&=(const BigInt&); //done
-    BigInt& operator|=(const BigInt&); //done
+        BigInt &operator+=(const BigInt &);
+        BigInt &operator*=(const BigInt &);
+        BigInt &operator-=(const BigInt &);
+        BigInt &operator/=(const BigInt &);
+        BigInt &operator^=(const BigInt &);
+        BigInt &operator%=(const BigInt &);
+        BigInt &operator&=(const BigInt &);
+        BigInt &operator|=(const BigInt &);
 
-    BigInt operator+() const;  //done
-    BigInt operator-() const;  //done
+        BigInt operator+() const;
+        BigInt operator-() const;
 
-    bool operator==(const BigInt&) const; //done
-    bool operator!=(const BigInt&) const; //done
-    bool operator<(const BigInt&) const; //done
-    bool operator>(const BigInt&) const; //done
-    bool operator<=(const BigInt&) const; //done
-    bool operator>=(const BigInt&) const; //done
+        bool operator==(const BigInt &) const;
+        bool operator!=(const BigInt &) const;
+        bool operator<(const BigInt &) const;
+        bool operator>(const BigInt &) const;
+        bool operator<=(const BigInt &) const;
+        bool operator>=(const BigInt &) const;
 
-    operator int() const; //done
-    operator std::string() const; //done
+        operator int() const;
+        operator std::string() const;
 
-    size_t size() const;  // done
+        size_t size() const;
 
-    std::vector<int> digits;
-    const int radix = 1000000000;
-    bool sign;
+        bool input_check(std::string);
+
+        std::vector<int> max_digit(std::vector<int>, std::vector<int>) const;
+
+        void shift_right();
+
+        void remove_leading_zeros();
+
+        std::string Bigint_to_binary_str() const;
+
+        std::string get_max_str(const BigInt &) const;
+
+        void bit_neg_check();
+        std::string str_invert_check(std::string,int);
+
+        void binary_str_to_Bigint(std::string str);
+
+        void is_negative_zero();
+
+        std::string invert(std::string);
+    };
+
+    BigInt operator+(const BigInt &, const BigInt &);
+    BigInt operator-(const BigInt &, const BigInt &);
+    BigInt operator*(const BigInt &, const BigInt &);
+    BigInt operator/(const BigInt &, const BigInt &);
+    BigInt operator^(const BigInt &, const BigInt &);
+    BigInt operator%(const BigInt &, const BigInt &);
+    BigInt operator&(const BigInt &, const BigInt &);
+    BigInt operator|(const BigInt &, const BigInt &);
 
 
-    bool input_check(std::string);
-    std::vector<int> max_digit(std::vector<int>,std::vector<int>) const;
-    void shift_right();
-    void remove_leading_zeros ();
-    std::string Bigint_to_binary_str() const;
-    void binary_str_to_Bigint(std::string str);
-    void is_negative_zero();
-    std::string invert(std::string);
-};
-
-BigInt operator+(const BigInt&, const BigInt&); //done
-BigInt operator-(const BigInt&, const BigInt&); //done
-BigInt operator*(const BigInt&, const BigInt&); //done
-BigInt operator/(const BigInt&, const BigInt&); //done
-BigInt operator^(const BigInt&, const BigInt&); //done
-BigInt operator%(const BigInt&, const BigInt&); //done
-BigInt operator&(const BigInt&, const BigInt&); //done
-BigInt operator|(const BigInt&, const BigInt&); //done
-
-
-std::ostream& operator<<(std::ostream& o, const BigInt& i); //done
-
+    std::ostream &operator<<(std::ostream &o, const BigInt &i);
+}
 #endif
