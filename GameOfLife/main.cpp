@@ -1,20 +1,19 @@
 #include "GameField.h"
 
 int main() {
-    gamefield f(10,20);
-    f.set_life(0,0);
-    f.set_life(1,0); //
+    gamefield f(5,10);
     f.set_life(2,0);
+    f.set_life(2,1);
+    f.set_life(2,2);
+    f.set_life(1,2);
+    f.set_life(0,1);
 
-    f.print_field();
-    std::cout<<"\n";
-    f.make_iteration();
-    f.print_field();
 
-    std::cout<<"\n";
-    f.make_iteration();
-    f.print_field();
+    do {
+        f.print_field();
+        std::cout<<"\n";
+        f.make_iteration();
+    } while(!f.is_field_empty());
 
-    //std::cout<<"\n"<< f.neighbors_count(1,1);
     return 0;
 }

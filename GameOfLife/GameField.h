@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <vector>
+using namespace std;
 
 const bool ALIVE = true;
 const bool DEAD = false;
@@ -24,13 +25,15 @@ public:
 
     void make_iteration();
 
+    bool is_field_empty();
+
 
 private:
     int length;
     int width;
 
-    std::vector<std::vector<bool>> cur_field; //
-    std::vector<std::vector<int>> neighbors;
+    vector<vector<bool>> cur_field; //
+    vector<vector<int>> neighbors;
 
 };
 

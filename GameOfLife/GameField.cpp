@@ -1,5 +1,6 @@
 #include "GameField.h"
 
+
 gamefield::gamefield(int length, int width) {
     this->width = width;
     this->length = length;
@@ -39,7 +40,9 @@ int gamefield::coord_mod(int x, int y) { //y - это длина или шири
 void gamefield::print_field() {
     for (int i = 0; i<length; i++){
         for (int j = 0; j<width; j++){
-            std::cout<<cur_field[i][j];
+            if (!cur_field[i][j])
+            cout<<"#";
+            else cout<<"*";
         }
         std::cout<<"\n";
     }
@@ -74,4 +77,15 @@ void gamefield::make_iteration() {
             else if (neighbors[i][j] > 3 || neighbors[i][j] < 2) cur_field[i][j] = DEAD;
         }
     }
+}
+
+bool gamefield::is_field_empty() {
+    int count = 0;
+    for (int i = 0; i<length; i++){
+        for (int j = 0; j<width; j++){
+            count+=neighbors[i][j];
+        }
+    }
+    if (count == 0) return true;
+    else return false;
 }
