@@ -1,9 +1,6 @@
 #include "BigInt.h"
 
 
-#define PLUS 0
-#define MINUS 1
-#define DIGITS_BASE 9
 namespace bigint {
     BigInt::BigInt() {
         sign = PLUS;

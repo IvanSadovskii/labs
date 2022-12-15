@@ -6,12 +6,17 @@
 #include <string>
 #include <vector>
 
+
 namespace bigint {
     class BigInt {
     private:
         std::vector<int> digits;
         const int radix = 1000000000;
         bool sign;
+
+        const bool PLUS = false;
+        const bool MINUS = true;
+        const int DIGITS_BASE = 9;
     public:
         BigInt();
         BigInt(int);
