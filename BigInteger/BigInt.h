@@ -17,6 +17,8 @@ namespace bigint {
         const bool PLUS = false;
         const bool MINUS = true;
         const int DIGITS_BASE = 9;
+        const int MAX_STR_ID = 0;
+        const int MIN_STR_ID = 1;
     public:
         BigInt();
         BigInt(int);

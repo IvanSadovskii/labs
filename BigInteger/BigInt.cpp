@@ -328,8 +328,8 @@ namespace bigint {
 
         std::vector<std::string> str_results = get_result_str(tmp,this->sign,other.sign);
 
-        std::string max_str = str_results[0];
-        std::string min_str = str_results[1];
+        std::string max_str = str_results[MAX_STR_ID];
+        std::string min_str = str_results[MIN_STR_ID];
 
         int max_index = (int) max_str.size() - 1;
         while (max_index >= 0) {
@@ -362,8 +362,8 @@ namespace bigint {
 
         std::vector<std::string> str_results = get_result_str(tmp,this->sign,other.sign);
 
-        std::string max_str = str_results[0];
-        std::string min_str = str_results[1];
+        std::string max_str = str_results[MAX_STR_ID];
+        std::string min_str = str_results[MIN_STR_ID];
 
         int max_index = (int) max_str.size() - 1;
 
