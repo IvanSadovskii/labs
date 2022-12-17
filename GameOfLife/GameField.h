@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Univerese.h"
 
 #ifndef LABS_GAMEFIELD_H
 #define LABS_GAMEFIELD_H
@@ -11,12 +11,13 @@ using namespace std;
 const bool ALIVE = true;
 const bool DEAD = false;
 
-class gamefield {
+class gamefield : public universe {
 public:
-    gamefield(int, int);
+    gamefield(std::ifstream &);
     ~gamefield();
 
     void print_field();
+
     void set_life(int, int);
 
     int coord_mod(int, int);
@@ -27,13 +28,18 @@ public:
 
     bool is_field_empty();
 
+    void game_until_last_generation();
+
+
+
 
 private:
-    int length;
-    int width;
+    //int length;
+    //int width;
 
-    vector<vector<bool>> cur_field; //
+     //
     vector<vector<int>> neighbors;
+    vector<vector<bool>> cur_field;
 
 };
 

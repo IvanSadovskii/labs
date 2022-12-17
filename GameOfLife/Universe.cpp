@@ -1,23 +1,9 @@
 #include "Univerese.h"
 
-
-universe::universe(string path) { //обработать все ошибки - потом
-    ifstream file;
-    file.open(path);
-
-    if (!file.is_open()){
-        throw std::invalid_argument("Error opening file\n");
-    }
-    else {
-        string str;
-
-        while (!file.eof()) {
-            getline(file, str);
-            line_indificator(str);
-        }
-
-        this->input_check();
-    }
+universe::~universe() {
+    this->coords.clear();
+    this->game_rule_to_survive_count.clear();
+    this->game_rule_to_alive_count.clear();
 }
 
 void universe::get_game_version(string str_tmp) {
@@ -69,7 +55,7 @@ void universe::set_gamerule(string buffer) {//забыл про #R
     is_there_game_rules_in_file = true;
 }
 
-void universe::set_height_and_width(string buffer) {
+void universe::set_length_and_width(string buffer) {
     string first_number;
     string second_number;
     int number_flag = 0;
@@ -87,9 +73,9 @@ void universe::set_height_and_width(string buffer) {
         }
         else second_number+=buffer[i];
     }
-    height = stoi(first_number);
+    length = stoi(first_number);
     width = stoi(second_number);
-    is_there_height_width_in_file = true;
+    is_there_length_width_in_file = true;
 }
 
 void universe::get_coords(string buffer) {
@@ -138,8 +124,8 @@ void universe::line_indificator(string str) {
         (*this).set_gamerule(str.substr(MIN_FIRST_INPUT_SYMBOLS_COUNT));
         return;
     }
-    if (!is_there_height_width_in_file){
-        (*this).set_height_and_width(str);
+    if (!is_there_length_width_in_file){
+        (*this).set_length_and_width(str);
     }
     else {
         (*this).get_coords(str);
@@ -148,7 +134,7 @@ void universe::line_indificator(string str) {
 
 void universe::input_check() {
     if (!is_there_game_version_in_file){
-        throw std::invalid_argument("File missing game version 1.06\n");
+        throw std::invalid_argument("File missing game version 1.06\n"); //здесь добавить дефолтные значения
     }
     if (!is_there_unversity_name_in_file){
         cout<<"The file is missing a universe name\n";
@@ -156,8 +142,8 @@ void universe::input_check() {
     if (!is_there_game_rules_in_file){
         cout<<"File is missing game rules\n";
     }
-    if (!is_there_height_width_in_file){
-        cout<<"The file is missing a universe height and width\n";
+    if (!is_there_length_width_in_file){
+        cout<<"The file is missing a universe length and width\n";
     }
     if (!is_there_coords_in_life){
         throw std::invalid_argument("The file does not contain the coordinates of live cells\n");
