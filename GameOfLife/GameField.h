@@ -28,7 +28,8 @@ public:
 
     bool is_field_empty();
 
-    void game_until_last_generation();
+    void tick (int);
+
 
 
 

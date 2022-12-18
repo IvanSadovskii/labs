@@ -11,6 +11,8 @@ public:
 class online_interface : public interface {
 public:
     void startGame(std::string) override;
+    void print_help();
+    void print_game_field_informaton(gamefield &, int);
 };
 
 class console {

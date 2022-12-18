@@ -149,3 +149,13 @@ void universe::input_check() {
         throw std::invalid_argument("The file does not contain the coordinates of live cells\n");
     }
 }
+
+std::string universe::get_universe_name() {
+    return universe_name;
+}
+vector<int> universe::get_alive_rule() {
+    return game_rule_to_alive_count;
+}
+vector<int> universe::get_survive_rule() {
+    return game_rule_to_survive_count;
+}

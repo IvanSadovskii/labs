@@ -32,6 +32,10 @@ public:
     void line_indificator(string);
     void input_check();
 
+    std::string get_universe_name();
+    vector<int> get_alive_rule();
+    vector<int> get_survive_rule();
+
 
 
 protected: //поменять на private после тестов

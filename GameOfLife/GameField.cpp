@@ -101,10 +101,10 @@ bool gamefield::is_field_empty() {
     else return false;
 }
 
-void gamefield::game_until_last_generation() {
-    do {
-        (*this).print_field();
-        std::cout<<"\n";
+void gamefield::tick(int n) {
+    for (int i = 0; i<n; i++) {
         (*this).make_iteration();
-    } while(!(*this).is_field_empty());
+    }
 }
+
+
