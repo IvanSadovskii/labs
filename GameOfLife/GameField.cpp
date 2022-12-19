@@ -107,4 +107,32 @@ void gamefield::tick(int n) {
     }
 }
 
+void gamefield::dump(std::string path) {
+    ofstream file;
+    file.open(path);
+
+    if (!file.is_open()) {
+        std::cout<<"Out file warn\n";
+        file.close();
+        return;
+    }
+
+    file << (*this).game_version <<"\n";
+    file <<"#N "<<(*this).universe_name <<"\n";
+    file <<"#R B";
+    for (int i = 0; i<game_rule_to_alive_count.size(); i++) file <<game_rule_to_alive_count[i];
+    file <<"/S";
+    for (int i = 0; i<game_rule_to_survive_count.size(); i++) file <<game_rule_to_survive_count[i];
+    file <<"\n";
+    file << length <<" "<<width<<"\n";
+
+    for (int i = 0; i<length; i++){
+        for (int j = 0; j<width; j++){
+            if (cur_field[i][j] == ALIVE) file << i <<" "<< j <<"\n";
+        }
+    }
+
+    file.close();
+}
+
 

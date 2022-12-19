@@ -30,8 +30,7 @@ public:
 
     void tick (int);
 
-
-
+    void dump(std::string);
 
 
 private:

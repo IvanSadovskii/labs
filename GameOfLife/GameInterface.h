@@ -15,12 +15,10 @@ public:
     void print_game_field_informaton(gamefield &, int);
 };
 
-class console {
+class offline_interface : public interface {
 public:
-    void choose_mod();
-    void launch_programm(interface&);
+    void startGame(std::string) override;
 };
-
 
 
 

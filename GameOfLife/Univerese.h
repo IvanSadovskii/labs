@@ -16,8 +16,14 @@ const char SPACE_ASCCI = ' ';
 const string GAME_VERSION_COMMENT = "#Li";
 const string UNIVERSE_NAME_COMMENT = "#N ";
 const string GAME_RULES_COMMENT = "#R ";
+const string DEFAULT_UNIVERSE_NAME = "DEFULT_UNIVERSE";
+const int DEFAULT_LENGTH = 10;
+const int DEFAULT_WIDTH = 20;
 const int X_COORD_ID = 0;
 const int Y_COORD_ID = 1;
+
+const vector<int> default_game_rule_to_alive_count = {3};
+const vector<int> default_game_rule_to_survive_count = {2,3};
 
 const int MIN_FIRST_INPUT_SYMBOLS_COUNT = 3;
 

@@ -16,6 +16,9 @@ void online_interface::startGame(std::string path) { //здесь еще ите�
     }
 
     gamefield game(cur_file);
+
+    std::cout<<"Enter the command (help - for information about commands)\n";
+
     while (true){
         std::cin>>command;
         if (command == "help") (*this).print_help();
@@ -28,18 +31,25 @@ void online_interface::startGame(std::string path) { //здесь еще ите�
             iteration_count+=n;
             (*this).print_game_field_informaton(game,iteration_count);
         }
+        if (command == "dump"){
+            std::string out_path;
+            std::cin>>out_path;
+            game.dump(out_path);
+        }
 
-        if (command == "exit") return;
+        if (command == "exit") {
+            cur_file.close();
+            return;
+        }
     }
-
 
 }
 
 void online_interface::print_help(){
-    std::cout<<"dump <filename> - сохранить вселенную в файл\n";
-    std::cout<<"tick <n=1> (и сокращенно t <n=1>) - рассчитать n (по умолчанию 1) итераций и напечатать результат\n";
-    std::cout<<"exit – завершить игру\n";
-    std::cout<<"help – распечатать справку о командах\n";
+    std::cout<<"dump <file name> - save the universe to a file\n";
+    std::cout<<"tick <n=1> (and t <n=1> for short) - calculate n (default 1) iterations and print the result\n";
+    std::cout<<"exit - end the game\n";
+    std::cout<<"help - print help about commands\n";
 }
 
 void online_interface::print_game_field_informaton(gamefield &field, int iteration_number) {
@@ -60,16 +70,31 @@ void online_interface::print_game_field_informaton(gamefield &field, int iterati
     tmp.clear();
 }
 
+void offline_interface::startGame(std::string path) {
+    ifstream cur_file;
+    std::string command;
+    std::string output_path;
+    int iterations;
 
-void console::choose_mod() { //cюда запихать еще параметры входной строки но можно и просто вводом
-    std::cout<<"Plese enter game mode: 1 - for online mod, 2 - for offline mod\n";
-    int mode;
-    std::cin>>mode;
+    cur_file.open(path);
 
-    online_interface online;
+    if (!cur_file.is_open()){
+        std::cout<<"Error opening current file\n";
+        cur_file.close();
+        cur_file.open("defult.txt");
+    }
 
-    if (mode == 1) launch_programm(online);
+    gamefield game(cur_file);
+
+    std::cout<<"Enter number of iterations:";
+    std::cin>>iterations;
+
+    std::cout<<"Enter output file:";
+    std::cin>>output_path;
+
+    game.tick(iterations);
+    game.dump(output_path);
+
+    cur_file.close();
 }
-void console::launch_programm(interface & mode) {
-    mode.startGame("test.txt"); //cюда  добавить ввод файла
-}
+

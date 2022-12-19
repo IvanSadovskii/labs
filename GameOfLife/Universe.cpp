@@ -137,12 +137,17 @@ void universe::input_check() {
         throw std::invalid_argument("File missing game version 1.06\n"); //здесь добавить дефолтные значения
     }
     if (!is_there_unversity_name_in_file){
+        (*this).universe_name = DEFAULT_UNIVERSE_NAME;
         cout<<"The file is missing a universe name\n";
     }
     if (!is_there_game_rules_in_file){
+        (*this).game_rule_to_survive_count = default_game_rule_to_survive_count;
+        (*this).game_rule_to_alive_count = default_game_rule_to_alive_count;
         cout<<"File is missing game rules\n";
     }
     if (!is_there_length_width_in_file){
+        (*this).length = DEFAULT_LENGTH;
+        (*this).width = DEFAULT_WIDTH;
         cout<<"The file is missing a universe length and width\n";
     }
     if (!is_there_coords_in_life){
