@@ -6,41 +6,45 @@
 
 #include <iostream>
 #include <vector>
-using namespace std;
+namespace game {
+    const bool ALIVE = true;
+    const bool DEAD = false;
 
-const bool ALIVE = true;
-const bool DEAD = false;
+    class gamefield : public universe {
+    public:
+        gamefield(std::ifstream &);
 
-class gamefield : public universe {
-public:
-    gamefield(std::ifstream &);
-    ~gamefield();
+        ~gamefield();
 
-    void print_field();
+        void print_field();
 
-    void set_life(int, int);
+        void set_life(int, int);
 
-    int coord_mod(int, int);
+        int coord_mod(int, int);
 
-    int neighbors_count(int, int);
+        int neighbors_count(int, int);
 
-    void make_iteration();
+        void make_iteration();
 
-    bool is_field_empty();
+        //bool is_field_empty();
 
-    void tick (int);
+        void tick(int);
 
-    void dump(std::string);
+        void dump(std::string);
+
+        bool get_cell(int, int);
+
+        std::vector<std::vector<bool>> get_cur_field();
 
 
-private:
-    //int length;
-    //int width;
+    private:
+        //int length;
+        //int width;
 
-     //
-    vector<vector<int>> neighbors;
-    vector<vector<bool>> cur_field;
 
-};
+        std::vector<std::vector<int>> neighbors;
+        std::vector<std::vector<bool>> cur_field;
 
+    };
+}
 #endif

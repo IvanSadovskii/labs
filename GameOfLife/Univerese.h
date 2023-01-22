@@ -6,60 +6,73 @@
 #include "string"
 #include "vector"
 
-using namespace std;
-const string CURRENT_GAME_VERSION = "#Life 1.06";
-const char BIRTH = 'B';
-const char SURVIVAL = 'S';
-const char SLASH_ASCII= '/';
-const char NINE_ASCCI = (char)(9 + '0');
-const char SPACE_ASCCI = ' ';
-const string GAME_VERSION_COMMENT = "#Li";
-const string UNIVERSE_NAME_COMMENT = "#N ";
-const string GAME_RULES_COMMENT = "#R ";
-const string DEFAULT_UNIVERSE_NAME = "DEFULT_UNIVERSE";
-const int DEFAULT_LENGTH = 10;
-const int DEFAULT_WIDTH = 20;
-const int X_COORD_ID = 0;
-const int Y_COORD_ID = 1;
+namespace game {
+    const std::string CURRENT_GAME_VERSION = "#Life 1.06";
+    const char BIRTH = 'B';
+    const char SURVIVAL = 'S';
+    const char SLASH_ASCII = '/';
+    const char NINE_ASCCI = (char) (9 + '0');
+    const char SPACE_ASCCI = ' ';
+    const std::string GAME_VERSION_COMMENT = "#Li";
+    const std::string UNIVERSE_NAME_COMMENT = "#N ";
+    const std::string GAME_RULES_COMMENT = "#R ";
+    const std::string DEFAULT_UNIVERSE_NAME = "DEFULT_UNIVERSE";
+    const int DEFAULT_LENGTH = 10;
+    const int DEFAULT_WIDTH = 20;
+    const int X_COORD_ID = 0;
+    const int Y_COORD_ID = 1;
+    const int NUMBER_OF_COORDS = 2;
 
-const vector<int> default_game_rule_to_alive_count = {3};
-const vector<int> default_game_rule_to_survive_count = {2,3};
+    const std::vector<int> default_game_rule_to_alive_count = {3};
+    const std::vector<int> default_game_rule_to_survive_count = {2, 3};
 
-const int MIN_FIRST_INPUT_SYMBOLS_COUNT = 3;
+    const int MIN_FIRST_INPUT_SYMBOLS_COUNT = 3;
 
-class universe{
-public:
-    ~universe();
-    void get_game_version(string);
-    void get_universe_name(string);
-    void get_coords(string);
-    void set_gamerule(string);
-    void set_length_and_width(string);
-    void line_indificator(string);
-    void input_check();
+    class universe {
+    public:
+        ~universe();
 
-    std::string get_universe_name();
-    vector<int> get_alive_rule();
-    vector<int> get_survive_rule();
+        void set_game_version(std::string);
+
+        void set_universe_name(std::string);
+
+        void set_coords(std::string);
+
+        void set_gamerule(std::string);
+
+        void set_length_and_width(std::string);
+
+        void line_indificator(std::string, bool);
+
+        void input_check();
+
+        std::string get_universe_name();
+
+        std::vector<int> get_alive_rule();
+
+        std::vector<int> get_survive_rule();
+
+        int get_length();
+
+        int get_width();
 
 
+    protected:
+        std::string game_version;
+        std::string universe_name;
 
-protected: //поменять на private после тестов
-    string game_version;
-    string universe_name;
+        int length;
+        int width;
 
-    int length;
-    int width;
+        bool is_there_length_width_in_file = false;
+        bool is_there_game_version_in_file = false;
+        bool is_there_unversity_name_in_file = false;
+        bool is_there_game_rules_in_file = false;
+        bool is_there_coords_in_life = false;
 
-    bool is_there_length_width_in_file = false;
-    bool is_there_game_version_in_file = false;
-    bool is_there_unversity_name_in_file = false;
-    bool is_there_game_rules_in_file = false;
-    bool is_there_coords_in_life = false;
-
-    vector<int> game_rule_to_alive_count;
-    vector<int> game_rule_to_survive_count;
-    vector<vector<int>> coords;
-};
-
+        std::vector<int> game_rule_to_alive_count;
+        std::vector<int> game_rule_to_survive_count;
+        std::vector<std::vector<int>> coords;
+    };
+}
 #endif
